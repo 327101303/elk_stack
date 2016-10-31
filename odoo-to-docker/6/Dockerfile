@@ -13,16 +13,15 @@ RUN set -x; \
 	&& chown -R openerp.openerp /var/log/odoo 
 ADD odoo /opt/ethicall/odoo
 ADD ethicall_frontend /opt/ethicall/ethicall_frontend
-COPY changename.sh /tmp/changename.sh
-#RUN sh /tmp/changename.sh
+COPY entrypoint.sh /entrypoint.sh
+RUN  chmod 744 /entrypoint.sh
 ADD ethicall_platform /opt/ethicall/ethicall_platform
 ADD eroad_base_addons /opt/ethicall/eroad_base_addons
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 COPY openerp-server.conf /tmp/openerp-server.conf
 COPY nginx.conf /etc/nginx/conf.d/loadbalance.conf
+RUN  rm -rf /etc/nginx/site-enable/*
 RUN chown -R openerp.openerp /opt/ethicall 
-COPY rc.local /etc/rc.local
-RUN chmod 755 /etc/rc.local
 
 EXPOSE 80 48369
-CMD ["/usr/bin/supervisord"]
+CMD ["/entrypoint.sh"]
