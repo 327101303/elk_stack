@@ -1,0 +1,8 @@
+from hub.local.ethicall.cn/tool/python-to-odoo-2.7:v4
+四个git仓库代码拉下来，copy进去
+执行启动odoo的命令
+启动依赖
+redis  ip  port
+postgres   ip  port  user pw
+
+4
