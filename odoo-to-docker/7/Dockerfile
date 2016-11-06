@@ -11,12 +11,12 @@ RUN set -x; \
 	&& mkdir -p /var/log/odoo \
 	&& useradd openerp \
 	&& chown -R openerp.openerp /var/log/odoo 
-ADD odoo /opt/ethicall/odoo
-ADD ethicall_frontend /opt/ethicall/ethicall_frontend
+COPY odoo /opt/ethicall/odoo
+COPY ethicall_frontend /opt/ethicall/ethicall_frontend
 COPY entrypoint.sh /entrypoint.sh
 RUN  chmod 744 /entrypoint.sh
-ADD ethicall_platform /opt/ethicall/ethicall_platform
-ADD eroad_base_addons /opt/ethicall/eroad_base_addons
+COPY ethicall_platform /opt/ethicall/ethicall_platform
+COPY eroad_base_addons /opt/ethicall/eroad_base_addons
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 COPY openerp-server-test.conf /tmp/openerp-server-test.conf
 COPY nginx.conf /etc/nginx/conf.d/loadbalance.conf
