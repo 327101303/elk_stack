@@ -24,7 +24,7 @@ if [[ $? = 0 ]];
         sleep 10
         docker stop $Dname
         sleep 5
-        docker commit $Dname hub.local.ethicall.cn/postgres/pro_postgres:v`date +%Y%m%d`
+        docker commit $Dname hub.local.ethicall.cn/postgres/pro_postgres:vv$system_`date +%Y%m%d`
 else
         echo "当日的数据库备份文件不在本地nas上"
 fi
