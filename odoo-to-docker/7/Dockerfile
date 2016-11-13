@@ -5,6 +5,8 @@ RUN set -x; \
 		supervisor \
 		openssh-server \
 		nginx \
+	&&  apt-get clean \
+	&&  apt-get autoclean \
 	&& mkdir -p /opt/ethicall/web_html5 \
 	&& mkdir -p /var/run/sshd \ 
 	&& mkdir -p /var/log/supervisor \ 
