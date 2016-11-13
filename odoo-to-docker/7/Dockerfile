@@ -11,7 +11,6 @@ RUN set -x; \
 	&& mkdir -p /var/log/odoo \
 	&& useradd openerp \
 	&& chown -R openerp.openerp /var/log/odoo 
-COPY odoo /opt/ethicall/odoo
 COPY ethicall_frontend /opt/ethicall/ethicall_frontend
 COPY ops/odoo-to-docker/7/entrypoint.sh /entrypoint.sh
 RUN  chmod 744 /entrypoint.sh
