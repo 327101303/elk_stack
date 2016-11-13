@@ -1,4 +1,4 @@
-FROM hub.local.ethicall.cn/tool/python-to-odoo2.7:v6
+FROM hub.local.ethicall.cn/ethicall/odoo8:v11
 RUN set -x; \
 	apt-get update \
 	&& apt-get install -y wget \
