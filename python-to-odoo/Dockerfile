@@ -1,8 +1,9 @@
-FROM ubuntu:14.04.3
+FROM  hub.local.ethicall.cn/tool/ubuntu:14.04.3
 COPY requirements.txt /tmp/
-ADD sources.list  /etc/apt/sources.list
+COPY sources.list  /etc/apt/sources.list
 RUN  mkdir /root/.pip
 COPY pip.conf /root/.pip/pip.conf
+COPY odoo /opt/ethicall/odoo
 RUN set -x; \
         apt-get update \
         && apt-get install -y --no-install-recommends \
