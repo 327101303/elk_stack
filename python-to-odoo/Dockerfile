@@ -29,10 +29,11 @@ RUN set -x; \
                 python-pip \
         &&  apt-get clean \
         &&  apt-get autoclean \
-        &&  pip install --no-cache-dir -r  /tmp/requirements.txt \
-        	unittest2 \
-	        pypinyin \
-        	redis \
-	        xlrd \
-        	Crypto \
-	        pycrypto
+        &&  pip install -r  /tmp/requirements.txt \
+        &&  pip install unittest2 \
+        &&  pip install pypinyin \
+        &&  pip install redis \
+        &&  pip install xlrd \
+        &&  pip install Crypto \
+        &&  pip install pycrypto \
+        &&  rm -rf /root/.cache/*
