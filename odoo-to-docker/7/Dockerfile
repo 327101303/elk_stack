@@ -1,6 +1,6 @@
 FROM hub.local.ethicall.cn/ethicall/odoo8:v15
 RUN set -x; \
-	&& mkdir -p /opt/ethicall/web_html5 \
+	mkdir -p /opt/ethicall/web_html5 \
 	&& mkdir -p /var/run/sshd \
 	&& mkdir -p /var/log/supervisor \
 	&& mkdir -p /var/log/odoo \
