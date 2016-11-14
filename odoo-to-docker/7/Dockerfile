@@ -1,12 +1,5 @@
 FROM hub.local.ethicall.cn/ethicall/odoo8:v11
 RUN set -x; \
-	apt-get update \
-	&& apt-get install -y wget \
-		supervisor \
-		openssh-server \
-		nginx \
-	&&  apt-get clean \
-	&&  apt-get autoclean \
 	&& mkdir -p /opt/ethicall/web_html5 \
 	&& mkdir -p /var/run/sshd \ 
 	&& mkdir -p /var/log/supervisor \ 
