@@ -1,4 +1,4 @@
-FROM hub.local.ethicall.cn/ethicall/odoo8:v11
+FROM hub.local.ethicall.cn/ethicall/odoo8:v15
 RUN set -x; \
 	&& mkdir -p /opt/ethicall/web_html5 \
 	&& mkdir -p /var/run/sshd \ 
