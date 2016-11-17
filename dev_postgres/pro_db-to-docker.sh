@@ -9,7 +9,7 @@ ssh admin@nas.ethicall.cn  'test  -f /backup/'$Filename' '
 if [[ $? = 0 ]];
    then
         scp admin@nas.ethicall.cn:/backup/$Filename ./
-        docker run -d -p 5432 --name=$Dname  hub.local.ethicall.cn/tool/postgres:9.4
+        docker run -d -p 5432 --name=$Dname  hub.local.ethicall.cn/tool/ethicall_postgres:v5
 
         Port=`docker ps |grep $Dname|awk -F ':' '{print $3}'|awk -F '-' '{print $1}'`
         sleep 5
