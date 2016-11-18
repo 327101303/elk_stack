@@ -2,13 +2,13 @@
 Filename=ethicall.`date +%Y%m%d`-cron
 Dname=dev_postgresql_$bamboo_planKey$bamboo_buildNumber
 echo $Filename
-echo "ssh admin@nas.ethicall.cn  '[ -f /backup/$Filename ]'"
-ssh admin@nas.ethicall.cn  'test  -f /backup/'$Filename' '
+echo "ssh admin@nas.ethicall.cn  '[ -f /backup/pro/$Filename ]'"
+ssh admin@nas.ethicall.cn  'test  -f /backup/pro/'$Filename' '
 
 
 if [[ $? = 0 ]];
    then
-        scp admin@nas.ethicall.cn:/backup/$Filename ./
+        scp admin@nas.ethicall.cn:/backup/pro/$Filename ./
         docker run -d -p 5432 --name=$Dname  hub.local.ethicall.cn/tool/ethicall_postgres:v5
 
         Port=`docker ps |grep $Dname|awk -F ':' '{print $3}'|awk -F '-' '{print $1}'`
