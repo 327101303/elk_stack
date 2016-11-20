@@ -1,0 +1,24 @@
+   pgsql:
+     image: hub.local.ethicall.cn/postgres/pro_postgres:v20161120
+     restart: always
+     ports: 
+       - "5432:5432"
+   
+
+   redis:
+     image: hub.local.ethicall.cn/tool/redis:latest
+     restart: always
+     ports: 
+       - "6379:6379"
+   
+   odoo:
+     image: hub.local.ethicall.cn/ethicall/ethicall:v37  
+     ports: 
+       - "80:80"
+       - "48369:48369"
+     restart: always
+     links:
+      - pgsql
+      - redis
+     volumes:
+      - /mnt:/mnt 

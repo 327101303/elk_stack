@@ -14,6 +14,9 @@ then
 mv $Sfile $Mfile
 ln -s $Mfile $Dfile
 chown -R openerp.openerp $Dfile
+chown -R openerp.openerp /opt
+cd /opt/ethicall/ethicall_platform/dependence/
+ln -s ../../odoo odoo
 touch $Lockfile
 fi
 /usr/bin/supervisord

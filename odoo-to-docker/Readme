@@ -6,3 +6,10 @@ redis  ip  port
 postgres   ip  port  user pw
 
 4
+
+
+#关于docker-compose
+##docker-compose使用方法
+前提是在本地已经同步了生产环境的odoo-document目录
+因为在docker-compos运行时需要挂载本地mnt到镜像，
+如果本地的操作系统是linux，需要在挂载本地目录时关闭selinux。setenfource 0
