@@ -1,0 +1,49 @@
+version: '2'
+
+services:
+  elasticsearch:
+#    image: hub.local.ethicall.cn/elkstack/ops_elasticsearch
+    build: elasticsearch/
+    ports:
+      - "49200:9200"
+      - "49300:9300"
+    volumes:
+      - ./elasticsearch/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
+      - ./data:/usr/share/elasticsearch/data
+    environment:
+      ES_JAVA_OPTS: "-Xms2g -Xmx2g"
+    networks:
+      - docker_elk
+  logstash:
+ #   image: hub.local.ethicall.cn/elkstack/ops_logstash
+    build: logstash/
+    command: -f /etc/logstash/conf.d/
+    volumes:
+      - ./logstash/config:/etc/logstash/conf.d
+    ports:
+      - "45000:5000"
+    networks:
+      - docker_elk
+    depends_on:
+      - elasticsearch
+  kibana:
+#    image: hub.local.ethicall.cn/elkstack/ops_kibana
+    build: kibana/
+    volumes:
+      - ./kibana/config/:/etc/kibana/
+    ports:
+      - "45601:5601"
+    networks:
+      - docker_elk
+    depends_on:
+      - elasticsearch
+  elk-redis:
+    image: redis
+    networks:
+      - docker_elk
+    ports:
+      - "46379:6379"
+
+networks:
+  docker_elk:
+    driver: bridge

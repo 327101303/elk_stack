@@ -1,0 +1,10 @@
+NGUSERNAME [a-zA-Z\.\@\-\+_%]+
+NGUSER %{NGUSERNAME}
+NGINXACCESS %{IPORHOST:clientip} %{NGUSER:ident} %{NGUSER:auth} \[%{HTTPDATE:timestamp}\] "%{WORD:verb} %{URIPATHPARAM:request} HTTP/%{NUMBER:httpversion}" %{NUMBER:response:int} (?:%{NUMBER:bytes:int}|-) (?:"(?:%{URI:referrer}|-)"|%{QS:referrer}) %{QS:agent}
+NGINXMAIN %{IPORHOST:host_name} %{IPORHOST:clientip}:%{POSINT:port:int} - \[%{HTTPDATE:timestamp}\] HTTP/%{NUMBER:httpversion} %{WORD:method} %{QS:request_uri} %{NUMBER:status:int} %{NUMBER:request_time:int} %{NUMBER:request_length:int} %{NUMBER:body_bytes:int} %{QS:referer} %{QS:user_agent} - %{QS:sessionid} %{QS:realid} (%{QS:upstream_addr}|-) (%{NUMBER:upstream_status:int}|-) (%{NUMBER:upstream_response_time:int}|-)
+NGINXERROR1 %{DATESTAMP:timestamp} \[%{LOGLEVEL:level}\] (%{NUMBER:pid:int}#%{NUMBER:tid:int}: \*%{NUMBER}|\*%{NUMBER}) %{GREEDYDATA:msg}
+NGINXERROR2 %{DATESTAMP:timestamp} \[%{LOGLEVEL:level}\] %{NUMBER:pid:int}#%{NUMBER:tid:int}: %{GREEDYDATA:msg}
+NGINXERROR3 %{DATESTAMP:timestamp} \[%{LOGLEVEL:level}\] %{GREEDYDATA:msg}
+NGINXERROR4 %{DATESTAMP:timestamp} %{GREEDYDATA:msg}
+
+UWSGIACCESS %{IPORHOST:clientip} %{USER:ident} \[%{HTTPDATE:timestamp}\] "%{WORD:method} %{URIPATHPARAM:request} HTTP/%{NUMBER:httpversion}" %{IPORHOST:host_name}(?::%{POSINT:port:int})? %{NUMBER:response_status:int} %{NUMBER:body_bytes:int} %{NUMBER:response_time:int} "%{GREEDYDATA:referrer}" "%{GREEDYDATA:agent}"

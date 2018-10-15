@@ -1,0 +1,2 @@
+WDATETIME %{MONTHDAY}[/-]%{MONTH}[/-]%{YEAR} %{TIME}
+WERKZEUG %{IPORHOST:clientip} - - \[%{WDATETIME:datetime}] \"%{WORD:method} %{GREEDYDATA:path} HTTP/%{NUMBER:httpversion}\" %{NUMBER:status:int} -
