@@ -17,7 +17,9 @@
       - "6379:6379"`
 ### 需要注意的是nat映射到宿主机的端口不要与当前已经存在的端口冲突
 
-* 宿主机设置 vm.max_map_count = 262144
+### 确认端口没有冲突的情况下就可以启动服务了，启动服务前，先配置宿主机vm.max_map_count
+设计成yaml文件中没有直接使用image启动容器的原因是，通过build的形式可以灵活的为es和kibana安装一些插件，比如：权限控制等待
+* 宿主机设置 sysctl -w vm.max_map_count=262144
 * docker-compose build 
 * docker-compose up -d 
 
