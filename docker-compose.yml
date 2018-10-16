@@ -5,8 +5,8 @@ services:
 #    image: hub.local.ethicall.cn/elkstack/ops_elasticsearch
     build: elasticsearch/
     ports:
-      - "49200:9200"
-      - "49300:9300"
+      - "9200:9200"
+      - "9300:9300"
     volumes:
       - ./elasticsearch/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
       - ./data:/usr/share/elasticsearch/data
@@ -21,7 +21,7 @@ services:
     volumes:
       - ./logstash/config:/etc/logstash/conf.d
     ports:
-      - "45000:5000"
+      - "5000:5000"
     networks:
       - docker_elk
     depends_on:
@@ -32,7 +32,7 @@ services:
     volumes:
       - ./kibana/config/:/etc/kibana/
     ports:
-      - "45601:5601"
+      - "5601:5601"
     networks:
       - docker_elk
     depends_on:
@@ -42,7 +42,7 @@ services:
     networks:
       - docker_elk
     ports:
-      - "46379:6379"
+      - "6379:6379"
 
 networks:
   docker_elk:
