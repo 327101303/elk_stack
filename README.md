@@ -17,6 +17,10 @@
       - "6379:6379"`
 ### 需要注意的是nat映射到宿主机的端口不要与当前已经存在的端口冲突
 
+* 宿主机设置 vm.max_map_count = 262144
+* docker-compose build 
+* docker-compose up -d 
+
 # 快照的备份与恢复
 * 备份前需要在elasticsearch配置文件中指明备份仓库的路径  
 `    ###repo
