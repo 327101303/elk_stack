@@ -51,8 +51,7 @@
     .
     ├── data
     │   ├── backup
-    │   │   ├── es_backup
-    │   │   └── es_backup_20170125_1100.tar.gz
+    │   │   └── es_backup.tar.gz
     │   └── nodes
     │       └── 0
     ├── docker-compose.yml

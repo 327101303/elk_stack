@@ -96,4 +96,4 @@ xpack.graph.enabled: false
 xpack.watcher.enabled: false
 xpack.reporting.enabled: false
 xpack.monitoring.elasticsearch.username: "kibana"
-xpack.monitoring.elasticsearch.password: "kibana"
+xpack.monitoring.elasticsearch.password: "kibanapwd"
