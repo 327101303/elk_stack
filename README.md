@@ -7,20 +7,20 @@
 
 启动成功后打开ip:5601即可看到kibana的界面，输入密码user:elastic  pwd:elasticl@pwd
 ## 启动docker-compose请注意配置文件中的端口号
- services:
-   elasticsearch:
-     ports:
-       - "9200:9200"
-       - "9300:9300"
-   logstash:
-     ports:
-       - "5000:5000"
-   kibana:
-     ports:
-       - "5601:5601"
-   elk-redis:
-     ports:
-       - "6379:6379" 
+    services:
+      elasticsearch:
+        ports:
+          - "9200:9200"
+          - "9300:9300"
+      logstash:
+        ports:
+          - "5000:5000"
+      kibana:
+        ports:
+          - "5601:5601"
+      elk-redis:
+        ports:
+          - "6379:6379" 
 
 ### 需要注意的是nat映射到宿主机的端口不要与当前已经存在的端口冲突
 
