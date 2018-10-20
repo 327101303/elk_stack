@@ -2,8 +2,8 @@
 这个分支供开发环境使用，已经安装权限控制的插件。所有组件通信都需要认证
 启动步骤：
 
- docker-compose build 
- docker-compose up -d 
+    docker-compose build 
+    docker-compose up -d 
 
 启动成功后打开ip:5601即可看到kibana的界面，输入密码user:elastic  pwd:elasticl@pwd
 ## 启动docker-compose请注意配置文件中的端口号
