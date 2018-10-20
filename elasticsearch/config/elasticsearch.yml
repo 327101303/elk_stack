@@ -21,7 +21,7 @@ http.cors.allow-methods: GET,POST
 #index.number_of_shards: 3
 #index.number_of_replicas: 1
 ## Threadpool Settings ##
-
+node.master: true
 # Search pool
 #threadpool.search.type: fixed
 #threadpool.search.size: 20
@@ -53,12 +53,12 @@ http.cors.allow-methods: GET,POST
 #index.translog.flush_threshold_ops: 50000
 
 # Minimum nodes alive to constitute an operational cluster
-#discovery.zen.minimum_master_nodes: 1
+discovery.zen.minimum_master_nodes: 2
 #discovery.zen.minimum_master_nodes: 3
 #discovery.zen.ping.timeout: 100s
-#discovery.zen.fd.ping_timeout: 100s
+discovery.zen.fd.ping_timeout: 100s
 #discovery.zen.ping.multicast.enabled: false
-#discovery.zen.ping.unicast.hosts: ["10.252.250.168"]
+discovery.zen.ping.unicast.hosts: [es2,es3,]
 #discovery.zen.ping.unicast.hosts: ["10.252.250.168","10.252.170.235"]
 #discovery.zen.ping.unicast.hosts: ["10.27.227.104"]
 #discovery.zen.ping_timeout: 100s
@@ -67,3 +67,57 @@ http.cors.allow-methods: GET,POST
 #discovery.zen.publish_timeout: 30s
 #discovery.zen.commit_timeout: 30s
 #xpack.security.audit.enabled: true
+#xpack.security.enabled: false
+#xpack.reporting.enabled: false       
+xpack.security.enabled: false       
+xpack.graph.enabled: false              
+xpack.watcher.enabled: false
+#xpack.reporting.enabled: false
+xpack.monitoring.enabled: true 
+#xpack.monitoring.elasticsearch.username: "kibana"
+#xpack.monitoring.elasticsearch.password: "kibana"
+
+readonlyrest:
+    enable: true
+    response_if_req_forbidden: Forbidden by ReadonlyREST ES plugin
+
+    access_control_rules:
+
+    - name: "::LOGSTASH::"
+      # auth_key is good for testing, but replace it with `auth_key_sha1`!
+      auth_key: logstash:logstashethicallcn
+      type: allow
+      actions: ["indices:data/read/*","indices:data/write/*","indices:admin/template/*","indices:admin/create","cluster:monitor/*"]
+      verbosity: error
+#      indices: ["logstash-*", "<no-index>"]
+
+    # We trust this server side component, full access granted via HTTP authentication
+    - name: "::SuperAdmin::"
+      # auth_key is good for testing, but replace it with `auth_key_sha1`!
+      auth_key: elastic:elasticl@ethical.cn
+      type: allow
+      verbosity: error
+
+    # Logs in via HTTP Basic Authentication, has RW access to kibana but zero access to non-kibana actions.
+    - name: "::KIBANA-SRV::"
+      auth_key: kibana:kibana
+      type: allow
+      verbosity: error
+
+    # Cannot configure or edit dashboards and visualizations.
+    - name: "::RO DEVELOPER::"
+      auth_key: ethicall:CIJetur3XiohNyV4
+      type: allow
+      actions: ["indices:data/read/*","indices:data/read/search"]
+      indices: ["*ethicall*"]
+      verbosity: error
+
+    # No authentication required to read from this index
+    - name: "::PUBLIC SEARCH::"
+      type: allow
+      kibana_access: ro
+      actions: ["indices:data/read/*","cluster:monitor/*","cluster:monitor/*",]
+      indices: ["public", "<no-index>","logstash-*",".kibana",".kibana-devnull","logstash-*",]
+      verbosity: error
+#      indices: ["public", "<no-index>",".kibana",".kibana-devnull","logstash-*","*ethicall-*","*monitoring*","ethicall_data_sales_flow*","*ethicall_*","doctor_product*","*er_base*","nginx-log*"]
+#      actions: ["indices:data/read/*","indices:data/write/*","indices:admin/template/*","indices:admin/create","cluster:monitor/*"]

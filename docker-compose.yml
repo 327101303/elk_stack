@@ -2,22 +2,47 @@ version: '2'
 
 services:
   elasticsearch:
-#    image: hub.local.ethicall.cn/elkstack/ops_elasticsearch
     build: elasticsearch/
+    restart: always
     ports:
       - "9200:9200"
       - "9300:9300"
     volumes:
       - ./elasticsearch/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
-      - ./data:/usr/share/elasticsearch/data
+      - /data/elasticsearch/data:/usr/share/elasticsearch/data
     environment:
-      ES_JAVA_OPTS: "-Xms2g -Xmx2g"
+      ES_JAVA_OPTS: "-Xms8g -Xmx8g"
     networks:
       - docker_elk
+
+  es2:
+    build: elasticsearch/
+    restart: always
+    volumes:
+      - ./elasticsearch/config/elasticsearch_node2.yml:/usr/share/elasticsearch/config/elasticsearch.yml
+      - /data/elasticsearch/data2:/usr/share/elasticsearch/data
+    environment:
+      ES_JAVA_OPTS: "-Xms8g -Xmx8g"
+    networks:
+      - docker_elk
+
+  es3:
+    build: elasticsearch/
+    restart: always
+    volumes:
+      - ./elasticsearch/config/elasticsearch_node3.yml:/usr/share/elasticsearch/config/elasticsearch.yml
+      - /data/elasticsearch/data3:/usr/share/elasticsearch/data
+    environment:
+      ES_JAVA_OPTS: "-Xms8g -Xmx8g"
+    networks:
+      - docker_elk
+
   logstash:
  #   image: hub.local.ethicall.cn/elkstack/ops_logstash
     build: logstash/
-    command: -f /etc/logstash/conf.d/
+    restart: always
+    #command: ["sleep","1000"] 
+    command: -f /etc/logstash/conf.d/ --log.level warn
     volumes:
       - ./logstash/config:/etc/logstash/conf.d
     ports:
@@ -28,7 +53,9 @@ services:
       - elasticsearch
   kibana:
 #    image: hub.local.ethicall.cn/elkstack/ops_kibana
+#    image:  docker.elastic.co/kibana/kibana:6.4.0
     build: kibana/
+    restart: always
     volumes:
       - ./kibana/config/:/etc/kibana/
     ports:
@@ -38,11 +65,13 @@ services:
     depends_on:
       - elasticsearch
   elk-redis:
-    image: redis
+    restart: always
+    image: hub.local.ethicall.cn/tool/redis:latest
+    #mem_limit: 1000000000
     networks:
       - docker_elk
     ports:
-      - "6379:6379"
+      - "0.0.0.0:6379:6379"
 
 networks:
   docker_elk:

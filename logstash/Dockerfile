@@ -1,4 +1,4 @@
-FROM  hub.local.ethicall.cn/elkstack/logstash:5.1.1 
+FROM  hub.local.ethicall.cn/elkstack/logstash:5.1.1
 
 ADD GeoLite2-City.mmdb.gz /etc/logstash/
 
