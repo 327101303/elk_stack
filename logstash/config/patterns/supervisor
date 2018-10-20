@@ -1,0 +1,1 @@
+SUPERVISORMAIN %{DATESTAMP:timestamp} %{LOGLEVEL:level} %{GREEDYDATA:msg}
