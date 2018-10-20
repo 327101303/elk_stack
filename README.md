@@ -1,7 +1,13 @@
 # elk-stack docker-compose
-这个分支供开发使用，没有任何权限控制的插件。所有组件通信不需要认证
+这个分支供开发环境使用，已经安装权限控制的插件。所有组件通信都需要认证
+启动步骤：
+`
+docker-compose build 
+docker-compose up -d 
+`
+启动成功后打开ip:5601即可看到kibana的界面，输入密码user:elastic  pwd:elasticl@pwd
 ## 启动docker-compose请注意配置文件中的端口号
-`services:
+`  services:
   elasticsearch:
     ports:
       - "9200:9200"
@@ -14,7 +20,8 @@
       - "5601:5601"
   elk-redis:
     ports:
-      - "6379:6379"`
+      - "6379:6379" 
+`
 ### 需要注意的是nat映射到宿主机的端口不要与当前已经存在的端口冲突
 
 # 快照的备份与恢复
@@ -58,6 +65,8 @@
     ├── elasticsearch
     │   ├── config
     │   │   └── elasticsearch.yml
+    │   │   └── elasticsearch_node2.yml
+    │   │   └── elasticsearch_node3.yml
     │   ├── Dockerfile
     │   └── readonlyrest-1.13.1_es5.1.1.zip
     ├── kibana
